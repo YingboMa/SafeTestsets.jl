@@ -12,7 +12,7 @@ macro safetestset(args...)
     length(args) != 2 && throw(err)
     name, expr = args
     if name isa String
-        mod = gensym()
+        mod = gensym(name)
         testname = name
     elseif name isa Expr && name.head == :(=) && length(name.args) == 2
         mod, testname = name.args

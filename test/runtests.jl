@@ -16,3 +16,23 @@ using SafeTestsets, Test
     @test @isdefined(a) == false
     @test @isdefined(MyTests) == true
 end
+
+@safetestset "SafeTimedTestsets Tests" begin
+    times = Dict()
+    @safetimedtestset times "Tests A" begin
+        include("tests.jl")
+        @isdefined(a) == true
+    end
+
+    @test @isdefined(a) == false
+
+    @safetimedtestset times MyTests = "Tests B" begin
+        include("tests.jl")
+        @isdefined(a) == true
+    end
+
+    @test @isdefined(a) == false
+    @test @isdefined(MyTests) == true
+    @test haskey(times, "Tests A")
+    @test sort(collect(keys(times))) == ["Tests A", "Tests B"]
+end

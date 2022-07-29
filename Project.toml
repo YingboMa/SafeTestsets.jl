@@ -1,0 +1,4 @@
+name = "SafeTestsets"
+uuid = "1071aab1-2ca0-4352-92bd-e10fd1e5761b"
+authors = ["YingboMa <mayingbo5@gmail.com>"]
+version = "0.1.0"

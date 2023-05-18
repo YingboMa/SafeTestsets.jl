@@ -1,0 +1,13 @@
+name = "SafeTestsets"
+uuid = "1bc83da4-3b8d-516f-aca4-4fe02f6d838f"
+authors = ["Yingbo Ma <mayingbo5@gmail.com>"]
+version = "0.0.1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+julia = "1.0"
+
+[targets]
+test = ["Test"]

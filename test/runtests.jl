@@ -5,6 +5,7 @@ using SafeTestsets, Test
         include("tests.jl")
         @isdefined(a) == true
     end
+    @safetestset "Tests" include("tests.jl")
 
     @test @isdefined(a) == false
 

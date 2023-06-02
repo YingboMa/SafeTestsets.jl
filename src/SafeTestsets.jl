@@ -19,6 +19,11 @@ macro safetestset(args...)
     else
         throw(err)
     end
+    if expr isa Expr && (expr.head == :call || expr.head == :let)
+        expr = :(begin
+            $expr
+        end)
+    end
     quote
         @eval module $mod
             using Test, SafeTestsets

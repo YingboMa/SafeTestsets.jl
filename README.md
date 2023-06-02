@@ -1,7 +1,6 @@
 # SafeTestsets.jl
 
 [![Build Status](https://travis-ci.org/YingboMa/SafeTestsets.jl.svg?branch=master)](https://travis-ci.org/YingboMa/SafeTestsets.jl)
-[![Build status](https://ci.appveyor.com/api/projects/status/rrn6eylvumax0ry3?svg=true)](https://ci.appveyor.com/project/YingboMa/safetestsets-jl)
 [![codecov](https://codecov.io/gh/YingboMa/SafeTestsets.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/YingboMa/SafeTestsets.jl)
 
 `@safetestset` puts `@testset` into a module.

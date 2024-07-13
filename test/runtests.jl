@@ -1,10 +1,12 @@
 using SafeTestsets, Test
 
 @safetestset "SafeTestsets Tests" begin
-    @safetestset "Tests" begin
+    ts = @safetestset "Tests" begin
         include("tests.jl")
         @test @isdefined(a) == true
     end
+    @test ts isa Test.DefaultTestSet
+    @test ts.n_passed == 2
 
     @safetestset "Tests" include("tests.jl")
 

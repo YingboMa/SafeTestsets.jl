@@ -38,12 +38,13 @@ macro safetestset(args...)
             push!(block.args, arg)
         end
     end
+    testset_expr = :(@testset $testname $block)
     quote
-        @eval module $mod
+        @eval $__module__ module $mod
             using Test, SafeTestsets
             $(user_imports...)
-            @testset $testname $block
         end
+        $__module__.$mod.eval($(QuoteNode(testset_expr)))
     end
 end
 

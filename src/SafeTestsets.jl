@@ -20,16 +20,25 @@ macro safetestset(args...)
         throw(err)
     end
     if expr isa Expr && (expr.head == :call || expr.head == :let)
-        expr = :(begin
-            $expr
-        end)
+        expr = Expr(:block, expr)
     end
+
+    user_imports = Any[]
+    block = Expr(:block)
+    for arg in expr.args
+        if arg isa Expr && (arg.head === :using || arg.head === :import)
+            push!(user_imports, arg)
+        else
+            push!(block.args, arg)
+        end
+    end
+
     quote
         @eval module $mod
             using Test, SafeTestsets
-            @testset $testname $expr
+            $(user_imports...)
+            @testset $testname $block
         end
-        nothing
     end
 end
 

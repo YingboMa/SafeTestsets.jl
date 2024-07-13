@@ -23,16 +23,21 @@ macro safetestset(args...)
         expr = Expr(:block, expr)
     end
 
+    # TODO: Line numbers aren't working yet for imports
+    line = nothing
     user_imports = Any[]
     block = Expr(:block)
     for arg in expr.args
-        if arg isa Expr && (arg.head === :using || arg.head === :import)
+        if arg isa LineNumberNode
+            line = arg
+        elseif arg isa Expr && (arg.head === :using || arg.head === :import)
+            isnothing(line) || (arg = Expr(:toplevel, line, arg))
             push!(user_imports, arg)
         else
+            isnothing(line) || push!(block.args, line)
             push!(block.args, arg)
         end
     end
-
     quote
         @eval module $mod
             using Test, SafeTestsets

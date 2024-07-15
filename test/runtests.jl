@@ -63,6 +63,6 @@ using SafeTestsets, Test
         location = LineNumberNode(@__LINE__() - 5, @__FILE__())
 
         found = expressions_with_line(Meta.macroexpand(@__MODULE__(), expr), location)
-        @test found == [:(using Base: foo)]
+        @test first(found) == :(using Base: foo)
     end
 end

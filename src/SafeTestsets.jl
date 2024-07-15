@@ -41,11 +41,11 @@ macro safetestset(args...)
         end
     end
 
-    testset_expr = :(@testset $testname $testset_block)
+    push!(module_block.args, :(const ts = @testset $testname $testset_block))
 
     return Expr(:block,
         :($__module__.eval($(QuoteNode(module_expr)))),
-        :($__module__.$mod.eval($(QuoteNode(testset_expr)))),
+        :($__module__.$mod.ts),
     )
 end
 
